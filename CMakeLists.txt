@@ -10,12 +10,16 @@ pkg_check_modules(XCB REQUIRED xcb xcb-atom xcb-randr)
 add_executable(suggestdpi
         buffer.c
         buffer.h
+        config.c
+        config.h
+        format.c
+        format.h
         log.c
         log.h
         main.c
         screen_info.c
         screen_info.h
-        config.h config.c format.h format.c)
+)
 target_compile_options(suggestdpi PUBLIC ${XCB_CFLAGS})
 target_link_options(suggestdpi PUBLIC ${XCB_LDFLAGS})
 target_link_libraries(suggestdpi PUBLIC m)
