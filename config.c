@@ -127,7 +127,7 @@ static ReadStat read_unsigned(char *str, uint16_t *ptr)
         str += 1;
     }
 
-    if (!isdigit(*str)) {
+    if (!isxdigit(*str)) {
         STAT_FAIL(0);
     }
 
@@ -257,7 +257,7 @@ bool read_config_row(FILE *restrict stream, ConfigRow *restrict config_row)
             fmt_quote_string(out, config_row->pnp);
         }
         if (config_row->has_product) {
-            fprintf(out, " product=%04x", config_row->product);
+            fprintf(out, " product=0x%04x", config_row->product);
         }
         if (config_row->has_name) {
             fputs(" name=", out);

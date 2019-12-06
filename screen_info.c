@@ -301,6 +301,17 @@ bool screen_info_primary(ScreenInfo *restrict info)
     LOGBM(DEBUG, out, "  - serial_number: ") fmt_quote_string(out, info->edid_info.serial_number);
     LOG(  DEBUG, "  - physical_width: %" PRIu8, info->edid_info.physical_width);
     LOG(  DEBUG, "  - physical_height: %" PRIu8, info->edid_info.physical_height);
+    LOG(  DEBUG, "config template:");
+    LOGBM(DEBUG, out, "  ") {
+        fputs("pnp=", out);
+        fmt_quote_string(out, info->edid_info.pnp_id);
+        fprintf(out, " product=0x%04" PRIx16, info->edid_info.product_id);
+        fputs(" name=", out);
+        fmt_quote_string(out, info->edid_info.product_name);
+        fputs(" serial=", out);
+        fmt_quote_string(out, info->edid_info.serial_number);
+        fputs(" dpi=96 # change it to your desirable value", out);
+    };
 
     buffer_free(&edid_buf);
     xcb_disconnect(conn);
